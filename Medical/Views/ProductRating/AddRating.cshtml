@@ -1,0 +1,55 @@
+﻿@model Medical.Models.Review
+
+@{
+    ViewData["Title"] = "AddRating";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>AddRating</h1>
+
+<h4>Review</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddRating">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ReviewId" class="control-label"></label>
+                <input asp-for="ReviewId" class="form-control" />
+                <span asp-validation-for="ReviewId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MemberId" class="control-label"></label>
+                <input asp-for="MemberId" class="form-control" />
+                <span asp-validation-for="MemberId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductId" class="control-label"></label>
+                <input asp-for="ProductId" class="form-control" />
+                <span asp-validation-for="ProductId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RatingTypeId" class="control-label"></label>
+                <input asp-for="RatingTypeId" class="form-control" />
+                <span asp-validation-for="RatingTypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CommentContent" class="control-label"></label>
+                <input asp-for="CommentContent" class="form-control" />
+                <span asp-validation-for="CommentContent" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreateDate" class="control-label"></label>
+                <input asp-for="CreateDate" class="form-control" />
+                <span asp-validation-for="CreateDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -1,0 +1,78 @@
+﻿@model Medical.ViewModels.CDoctorDetailViewModel
+
+@{
+    ViewData["Title"] = "depEdit";
+    //Layout = "~/Areas/Admin/_ViewStart.cshtml";
+}
+@*///////////////////////////////////////////////////////////開發中 Ajax 選單選擇Departmant 和 Category*@
+<h1>depEdit</h1>
+
+<h4>CDoctorDetailViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="depEdit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="DeptCategoryID" class="control-label"></label>
+                <input asp-for="DeptCategoryID" class="form-control" />
+                <span asp-validation-for="DeptCategoryID" class="text-danger"></span>
+            </div>
+            <select id="select1">選擇科別</select>
+            <div class="form-group">
+                <label asp-for="DepartmentID" class="control-label"></label>
+                <input asp-for="DepartmentID" class="form-control" />
+                <span asp-validation-for="DepartmentID" class="text-danger"></span>
+            </div>
+            <select id="select2">選擇科目</select>
+            <div class="form-group">
+                <label asp-for="DepName" class="control-label"></label>
+                <input asp-for="DepName" class="form-control" />
+                <span asp-validation-for="DepName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+<script>
+    const selDepC = document.querySelector("#select1");
+    const selDep = document.querySelector("#select2")
+    
+    selDepC.addEventListener("change", () =>
+    {
+        console.log(selDepC.value);
+        getDep();
+    })
+    getDepC();
+    getDep();
+    async function getDepC()
+    {
+        const depCs = await fetch('@Url.Content("~/Doctor/getDepC")').then(response => response.json());
+        depCs.forEach((DeptCategoryName) =>
+        {
+            const opt = new Option(DeptCategoryName, DeptCategoryName);
+            selDepC.options.add(opt);
+        })
+    }
+
+    async function getDep()
+    {
+         $("#select2").empty();
+        const deps = await fetch('@Url.Content("~/Doctor/getDep")', { depCName:selDepC.value }).then(response => response.json());
+        deps.forEach((DeptName) =>
+        {
+            const opt = new Option(DeptName, DeptName);
+            selDep.options.add(opt);
+        })
+    }
+</script>
+}
